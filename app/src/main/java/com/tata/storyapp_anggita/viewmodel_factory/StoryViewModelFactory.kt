@@ -3,11 +3,11 @@ package com.tata.storyapp_anggita.viewmodel_factory
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import com.tata.storyapp_anggita.data.repository.MainRepository
 import com.tata.storyapp_anggita.data.repository.StoryRepository
 import com.tata.storyapp_anggita.di.MainInjection
 import com.tata.storyapp_anggita.di.StoryInjection
+import com.tata.storyapp_anggita.viewmodel.MapsViewModel
 import com.tata.storyapp_anggita.viewmodel.RecyclerViewModel
 import com.tata.storyapp_anggita.viewmodel.StoryViewModel
 
@@ -20,7 +20,10 @@ class StoryViewModelFactory private constructor(private val userRepo: MainReposi
                 RecyclerViewModel(userRepo, storyRepo) as T
             }
             modelClass.isAssignableFrom(StoryViewModel::class.java) -> {
-                StoryViewModel(userRepo, storyRepo) as T
+                StoryViewModel(storyRepo) as T
+            }
+            modelClass.isAssignableFrom(MapsViewModel::class.java) -> {
+                MapsViewModel(storyRepo) as T
             }
             else -> {
                 throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

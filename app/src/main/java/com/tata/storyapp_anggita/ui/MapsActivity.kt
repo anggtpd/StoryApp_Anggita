@@ -52,8 +52,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-
-
         setViewModel()
     }
 
@@ -147,7 +145,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     }
                     is Result.Success -> {
                         binding.progressBar.visibility = View.GONE
-                        result.data.listStory?.map {
+                        result.data.listStory.map {
                             if (it != null) {
                                 if (it.lat != null && it.lon != null) {
                                     mMap.addMarker(

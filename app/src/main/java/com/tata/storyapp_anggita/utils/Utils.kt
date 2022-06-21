@@ -6,7 +6,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Environment
-import android.renderscript.ScriptGroup
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -14,7 +13,7 @@ import java.util.*
 object Utils {
     private const val FILENAME_FORMAT  = "dd-MMM-yyyy"
 
-    val timeStamp: String = SimpleDateFormat(
+    private val timeStamp: String = SimpleDateFormat(
         FILENAME_FORMAT,
         Locale.US
     ).format(System.currentTimeMillis())

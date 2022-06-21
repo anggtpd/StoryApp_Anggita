@@ -28,6 +28,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import com.tata.storyapp_anggita.data.Result
 import com.tata.storyapp_anggita.utils.Utils.uriToFile
+import okhttp3.RequestBody
 
 class StoryActivity : AppCompatActivity() {
 
@@ -58,16 +59,10 @@ class StoryActivity : AppCompatActivity() {
 
     private fun setViewModel() {
         val factory: StoryViewModelFactory = StoryViewModelFactory.getInstance(this)
-        storyViewModel = ViewModelProvider(this, factory) [StoryViewModel::class.java]
-
-        storyViewModel.getToken().observe(this) {token ->
-            if (token.isEmpty()) {
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
-            }else{
-                this.token = token
-            }
-        }
+        storyViewModel = ViewModelProvider(
+            this,
+            factory
+        )[StoryViewModel::class.java]
     }
 
     override fun onRequestPermissionsResult(
@@ -99,7 +94,9 @@ class StoryActivity : AppCompatActivity() {
                 val description = description.toRequestBody("text/plain".toMediaType())
                 val requestImageFile = file.asRequestBody("image/jpg".toMediaTypeOrNull())
                 val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData("photo", file.name, requestImageFile)
-                storyViewModel.uploadStory(token, imageMultipart, description).observe(this) {result ->
+                val lat: RequestBody? = null
+                val lon: RequestBody? = null
+                storyViewModel.uploadStory(token, imageMultipart, description, lat, lon).observe(this) {result ->
                     if (result != null) {
                         when(result) {
                             is Result.Loading -> {

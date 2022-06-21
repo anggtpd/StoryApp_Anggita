@@ -21,11 +21,9 @@ abstract class StoryDatabase : RoomDatabase() {
 
         @JvmStatic
         fun getInstance(context: Context): StoryDatabase {
-            return INSTANCE ?: synchronized(this) {
-                INSTANCE ?: Room.databaseBuilder(
-                    context.applicationContext,
-                    StoryDatabase::class.java, "story.db"
-                )
+            return INSTANCE ?: synchronized(this) { INSTANCE ?: Room.databaseBuilder(
+                    context.applicationContext, StoryDatabase::class.java, "story.db")
+                    .allowMainThreadQueries()
                     .fallbackToDestructiveMigration()
                     .build()
                     .also { INSTANCE = it }

@@ -42,6 +42,7 @@ class RecyclerActivity : AppCompatActivity() {
                 finish()
             }
         }
+
         recyclerViewModel.getToken().observe(this){token ->
             this.token = token
             if (token.isNotEmpty()){
@@ -56,6 +57,9 @@ class RecyclerActivity : AppCompatActivity() {
                 }
             }
         }
+
+
+
 
     }
 
@@ -76,7 +80,7 @@ class RecyclerActivity : AppCompatActivity() {
                 startActivity(Intent(this, StoryActivity::class.java))
                 true
             }
-            R.id.toggle_location -> {
+            R.id.open_map -> {
                 val intent = Intent(this, MapsActivity::class.java)
                 intent.putExtra(MapsActivity.EXTRA_TOKEN, token)
                 startActivity(intent)

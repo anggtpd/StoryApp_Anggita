@@ -37,10 +37,10 @@ class StoryRepository(
         }
     }
 
-    fun uploadStory(token: String, imageMultipart: MultipartBody.Part, desc: RequestBody): LiveData<Result<UploadResponse>> = liveData {
+    fun uploadStory(token: String, imageMultipart: MultipartBody.Part, desc: RequestBody, lat: RequestBody?, lon: RequestBody?): LiveData<Result<UploadResponse>> = liveData {
         emit(Result.Loading)
         try {
-            val client = apiService.uploadStory("Bearer $token", imageMultipart, desc)
+            val client = apiService.uploadStory("Bearer $token", imageMultipart, desc, lat, lon)
             emit(Result.Success(client))
         }catch (e : Exception) {
             e.printStackTrace()

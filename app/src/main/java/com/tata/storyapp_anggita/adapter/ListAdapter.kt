@@ -10,6 +10,7 @@ import com.tata.storyapp_anggita.data.response.ListStoryItem
 import com.tata.storyapp_anggita.databinding.ItemStoryBinding
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import com.tata.storyapp_anggita.R
 import com.tata.storyapp_anggita.ui.DetailActivity
 
 class ListAdapter: PagingDataAdapter<ListStoryItem, ListAdapter.MyViewHolder>(DIFF_CALLBACK){
@@ -32,6 +33,8 @@ class ListAdapter: PagingDataAdapter<ListStoryItem, ListAdapter.MyViewHolder>(DI
             }
             Glide.with(itemView.context)
                 .load(data.photoUrl)
+                .placeholder(R.drawable.image_loading)
+                .error(R.drawable.image_error)
                 .into(binding.ivAvatar)
         }
     }

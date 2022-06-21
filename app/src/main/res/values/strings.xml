@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">StoryApp_Anggita</string>
+    <string name="logo">logo</string>
+    <string name="login">LOGIN</string>
+    <string name="email">Email</string>
+    <string name="email_is_invalid">Email format is invalid!</string>
+    <string name="hint_email">Enter your email</string>
+    <string name="min_length">Minimal Length %1$d characters</string>
+    <string name="hint_pass">Enter your password</string>
+    <string name="register">Register</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="name">Name</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="camera">CAMERA</string>
+    <string name="gallery">GALLERY</string>
+    <string name="hint_desc">Share your story here!</string>
+    <string name="upload">UPLOAD</string>
+    <string name="don_t_have_an_account_yet">Don\'t have an account yet?</string>
+    <string name="logout">Logout</string>
+    <string name="register_failed">Register failed, please try again!</string>
+    <string name="show_the_map">Show the Map</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="share_location">Share Location</string>
+    <string name="retry">Retry</string>
+</resources>

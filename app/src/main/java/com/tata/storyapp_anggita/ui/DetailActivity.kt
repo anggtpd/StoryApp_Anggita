@@ -3,6 +3,7 @@ package com.tata.storyapp_anggita.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
+import com.tata.storyapp_anggita.R
 import com.tata.storyapp_anggita.data.response.ListStoryItem
 import com.tata.storyapp_anggita.databinding.ActivityDetailBinding
 
@@ -24,6 +25,8 @@ class DetailActivity : AppCompatActivity() {
         }
         Glide.with(this)
             .load(story?.photoUrl)
+            .placeholder(R.drawable.image_loading)
+            .error(R.drawable.image_error)
             .into(binding.imgDetail)
     }
 

@@ -1,6 +1,7 @@
 package com.tata.storyapp_anggita.data.response
 
 import android.os.Parcelable
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
@@ -22,6 +23,7 @@ data class StoryResponse(
 data class ListStoryItem(
 
     @field:SerializedName("photoUrl")
+    @ColumnInfo(name = "photo_url")
     val photoUrl: String,
 
     @field:SerializedName("name")

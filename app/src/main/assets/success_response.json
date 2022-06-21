@@ -3,94 +3,49 @@
   "message": "Stories fetched successfully",
   "listStory": [
     {
-      "id": "story-i-YStW5nfJ8SEszT",
-      "name": "Zekken",
-      "description": "ini deskripsi",
-      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1650637612495_BkcK8riw.jpg",
-      "createdAt": "2022-04-22T14:26:52.497Z",
-      "lat": null,
-      "lon": null
+      "id": "story-FvU4u0Vp2S3PMsFg",
+      "name": "Dimas",
+      "description": "Lorem Ipsum",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1641623658595_dummy-pic.png",
+      "createdAt": "2022-01-08T06:34:18.598Z",
+      "lat": -10.212,
+      "lon": -16.002
     },
     {
-      "id": "story-YJ-2AeoYOlViLtEa",
-      "name": "znd",
-      "description": "yaya",
-      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1650637287856_RPQm9bON.jpg",
-      "createdAt": "2022-04-22T14:21:27.913Z",
-      "lat": null,
-      "lon": null
+      "id": "story-FvU4u0Vp2S3PMsFg",
+      "name": "Dimas",
+      "description": "Lorem Ipsum",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1641623658595_dummy-pic.png",
+      "createdAt": "2022-01-08T06:34:18.598Z",
+      "lat": -10.212,
+      "lon": -16.002
     },
     {
-      "id": "story-wANhQG7o3DyKXgWH",
-      "name": "d",
-      "description": "a",
-      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1650637217496_BCNXwcYe.jpg",
-      "createdAt": "2022-04-22T14:20:17.497Z",
-      "lat": null,
-      "lon": null
+      "id": "story-FvU4u0Vp2S3PMsFg",
+      "name": "Dimas",
+      "description": "Lorem Ipsum",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1641623658595_dummy-pic.png",
+      "createdAt": "2022-01-08T06:34:18.598Z",
+      "lat": -10.212,
+      "lon": -16.002
     },
     {
-      "id": "story-v6G2cgmUBaOzTia1",
-      "name": "ya",
-      "description": "test",
-      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1650637193205_0OcVWAL7.jpg",
-      "createdAt": "2022-04-22T14:19:53.207Z",
-      "lat": null,
-      "lon": null
+      "id": "story-FvU4u0Vp2S3PMsFg",
+      "name": "Dimas",
+      "description": "Lorem Ipsum",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1641623658595_dummy-pic.png",
+      "createdAt": "2022-01-08T06:34:18.598Z",
+      "lat": -10.212,
+      "lon": -16.002
     },
     {
-      "id": "story-i6C9p_MzqRLHDaqv",
-      "name": "d",
-      "description": "aaaaaa",
-      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1650637189177_foNvby9v.jpg",
-      "createdAt": "2022-04-22T14:19:49.179Z",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "id": "story-z9w2V6t047zOrZEB",
-      "name": "reviewer42",
-      "description": "test",
-      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1650636622495_c2JNDlx4.jpg",
-      "createdAt": "2022-04-22T14:10:22.498Z",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "id": "story-ban_EEuOAbrI0UE_",
-      "name": "reviewer42",
-      "description": "test",
-      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1650636605801_EDHStwfc.jpg",
-      "createdAt": "2022-04-22T14:10:05.803Z",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "id": "story-O7OLZln5WO6V22ws",
-      "name": "sayaaa",
-      "description": "ini tempat tidur",
-      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1650636446344_7K2t4Mnh.jpg",
-      "createdAt": "2022-04-22T14:07:26.347Z",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "id": "story-POAD7AC5bd8PtUiv",
-      "name": "sayaaa",
-      "description": "ini tempat tidur",
-      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1650636440245_B4NyDxNi.jpg",
-      "createdAt": "2022-04-22T14:07:20.248Z",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "id": "story-RcubaFFm8OhW-lda",
-      "name": "Guest",
-      "description": "Ini adalah deksripsi gambar",
-      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1650636405979_DHP2YVpp.jpg",
-      "createdAt": "2022-04-22T14:06:45.980Z",
-      "lat": null,
-      "lon": null
+      "id": "story-FvU4u0Vp2S3PMsFg",
+      "name": "Dimas",
+      "description": "Lorem Ipsum",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1641623658595_dummy-pic.png",
+      "createdAt": "2022-01-08T06:34:18.598Z",
+      "lat": -10.212,
+      "lon": -16.002
     }
   ]
 }

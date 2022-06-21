@@ -1,21 +1,24 @@
 package com.tata.storyapp_anggita.ui
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.Intent.ACTION_GET_CONTENT
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.location.Location
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.tata.storyapp_anggita.databinding.ActivityStoryBinding
 import com.tata.storyapp_anggita.utils.Utils
 import com.tata.storyapp_anggita.viewmodel.StoryViewModel
@@ -34,28 +37,65 @@ class StoryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityStoryBinding
     private lateinit var storyViewModel: StoryViewModel
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var token: String
     private lateinit var currentPhotoPath: String
     private var getFile: File? = null
+    private var location: Location? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        title = "Story"
+        token = intent.getStringExtra(MapsActivity.EXTRA_TOKEN).toString()
+
+        title = "Upload Story"
 
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
         }
 
         setViewModel()
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         binding.apply {
             btnCamera.setOnClickListener { startTakePhoto() }
             btnGallery.setOnClickListener { startGaleri() }
             btnUpload.setOnClickListener { uploadImage() }
+            toggleLocation.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    getMyLocation()
+                }else{
+                    location = null
+                }
+            }
         }
     }
+
+    @SuppressLint("MissingPermission")
+    private fun getMyLocation() {
+        if (ContextCompat.checkSelfPermission(this.applicationContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            fusedLocationClient.lastLocation.addOnSuccessListener { loc ->
+                if (loc != null) {
+                    this.location = loc
+                }else{
+                    binding.toggleLocation.isChecked = false
+                    Toast.makeText(this, "Location is not found. Try Again.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }else{
+            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+    }
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                getMyLocation()
+            }
+        }
 
     private fun setViewModel() {
         val factory: StoryViewModelFactory = StoryViewModelFactory.getInstance(this)
@@ -89,7 +129,7 @@ class StoryActivity : AppCompatActivity() {
             if (description.isEmpty()) {
                 binding.etDesc.error = "Enter your description"
             }else{
-                binding.progressBar.visibility = View.VISIBLE
+                showProgressBar(true)
                 val file = Utils.reduceFileImage(getFile as File)
                 val description = description.toRequestBody("text/plain".toMediaType())
                 val requestImageFile = file.asRequestBody("image/jpg".toMediaTypeOrNull())
@@ -100,15 +140,15 @@ class StoryActivity : AppCompatActivity() {
                     if (result != null) {
                         when(result) {
                             is Result.Loading -> {
-                                binding.progressBar.visibility = View.VISIBLE
+                                showProgressBar(true)
                             }
                             is Result.Success -> {
-                                binding.progressBar.visibility = View.GONE
+                                showProgressBar(false)
                                 Toast.makeText(this, "Upload Success", Toast.LENGTH_SHORT).show()
                                 finish()
                             }
                             is Result.Error -> {
-                                binding.progressBar.visibility = View.GONE
+                                showProgressBar(false)
                                 Toast.makeText(this, "Failed. Cause: ${result.error}", Toast.LENGTH_SHORT).show()
                             }
                         }
@@ -161,8 +201,31 @@ class StoryActivity : AppCompatActivity() {
         }
     }
 
+    private fun showProgressBar(isLoading: Boolean) {
+        binding.apply {
+            btnCamera.isEnabled = !isLoading
+            btnGallery.isEnabled = !isLoading
+            btnUpload.isEnabled = !isLoading
+            etDesc.isEnabled = !isLoading
+            toggleLocation.isEnabled = !isLoading
+
+            if (isLoading) {
+                progressBar.animate()
+                    .alpha(1f)
+                    .setDuration(500)
+                    .start()
+            } else {
+                progressBar.animate()
+                    .alpha(0f)
+                    .setDuration(300)
+                    .start()
+            }
+        }
+    }
+
     companion object {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
+        const val EXTRA_TOKEN = "extra_token"
     }
 }

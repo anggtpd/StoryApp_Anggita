@@ -14,6 +14,7 @@ import com.tata.storyapp_anggita.data.retrofit.ApiService
 import kotlinx.coroutines.flow.map
 import java.lang.Exception
 import kotlinx.coroutines.flow.Flow
+import retrofit2.HttpException
 
 class MainRepository private constructor(
     private val dataStore: DataStore<Preferences>,
@@ -25,8 +26,14 @@ class MainRepository private constructor(
         try {
             val result = apiService.register(name, email, password)
             emit(Result.Success(result))
-        }catch (e : Exception) {
-            emit(Result.Error(e.message.toString()))
+        }catch (throwable: HttpException){
+            try {
+                throwable.response()?.errorBody()?.source()?.let {
+                    emit(Result.Error(it.toString()))
+                }
+            } catch (exception: Exception) {
+                emit(Result.Error(exception.message.toString()))
+            }
         }
     }
 
@@ -35,8 +42,14 @@ class MainRepository private constructor(
         try {
             val result = apiService.login(email, password)
             emit(Result.Success(result))
-        }catch (e : Exception) {
-            emit(Result.Error(e.message.toString()))
+        }catch (throwable: HttpException){
+            try {
+                throwable.response()?.errorBody()?.source()?.let {
+                    emit(Result.Error(it.toString()))
+                }
+            } catch (exception: Exception) {
+                emit(Result.Error(exception.message.toString()))
+            }
         }
     }
 

@@ -15,12 +15,13 @@ import com.tata.storyapp_anggita.ui.DetailActivity
 
 class ListAdapter: PagingDataAdapter<ListStoryItem, ListAdapter.MyViewHolder>(DIFF_CALLBACK){
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): MyViewHolder {
-        val binding = ItemStoryBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
+    override fun onCreateViewHolder(parent: ViewGroup, i: Int): MyViewHolder {
+        val binding = ItemStoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
     }
 
-    class MyViewHolder (private val binding: ItemStoryBinding): RecyclerView.ViewHolder(binding.root) {
+    class MyViewHolder (private val binding: ItemStoryBinding):
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(context: Context, data: ListStoryItem) {
             binding.apply {
                 tvUsername.text = data.name

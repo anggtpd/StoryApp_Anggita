@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Environment
+import android.util.Log
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -22,6 +23,7 @@ object Utils {
         val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(timeStamp, ".jpg", storageDir)
     }
+
 
     fun uriToFile(selectedImg: Uri, context: Context): File {
         val contentResolver: ContentResolver = context.contentResolver

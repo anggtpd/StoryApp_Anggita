@@ -57,10 +57,6 @@ class RecyclerActivity : AppCompatActivity() {
                 }
             }
         }
-
-
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -77,7 +73,9 @@ class RecyclerActivity : AppCompatActivity() {
                 true
             }
             R.id.upload_story -> {
-                startActivity(Intent(this, StoryActivity::class.java))
+                val intent = Intent(this, StoryActivity::class.java)
+                intent.putExtra(StoryActivity.EXTRA_TOKEN, token)
+                startActivity(intent)
                 true
             }
             R.id.open_map -> {

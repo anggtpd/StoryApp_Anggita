@@ -29,6 +29,7 @@ import com.tata.storyapp_anggita.R
 import com.tata.storyapp_anggita.databinding.ActivityMapsBinding
 import com.tata.storyapp_anggita.viewmodel.MapsViewModel
 import com.tata.storyapp_anggita.data.Result
+import com.tata.storyapp_anggita.ui.StoryActivity.Companion.EXTRA_TOKEN
 import com.tata.storyapp_anggita.viewmodel_factory.StoryViewModelFactory
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -55,9 +56,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         setViewModel()
     }
 
-    companion object {
-        const val EXTRA_TOKEN = "extra_token"
-    }
 
     private fun setViewModel() {
         val factory: StoryViewModelFactory = StoryViewModelFactory.getInstance(this)
@@ -136,30 +134,23 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun showData() {
-        val boundsBuilder = LatLngBounds.Builder()
-        mapsViewModel.getAllStoriesWithLocation(token).observe(this) { result ->
-            if (result != null) {
-                when (result) {
+        mapsViewModel.getAllStoriesWithLocation(token).observe(this){result ->
+            if (result != null){
+                when(result) {
                     is Result.Loading -> {
                         binding.progressBar.visibility = View.VISIBLE
                     }
                     is Result.Success -> {
                         binding.progressBar.visibility = View.GONE
                         result.data.listStory.map {
-                            if (it != null) {
-                                if (it.lat != null && it.lon != null) {
-                                    mMap.addMarker(
-                                        MarkerOptions()
-                                            .position(LatLng(it.lat, it.lon))
-                                            .title(it.name)
-                                            .icon(
-                                                BitmapDescriptorFactory.defaultMarker(
-                                                    BitmapDescriptorFactory.HUE_BLUE
-                                                )
-                                            )
-                                            .snippet("${it.lat}, ${it.lon}")
-                                    )
-                                }
+                            if (it.lat != null && it.lon != null){
+                                mMap.addMarker(
+                                    MarkerOptions()
+                                        .position(LatLng(it.lat, it.lon))
+                                        .title(it.name)
+                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                                        .snippet("${it.lat}, ${it.lon}")
+                                )
                             }
                         }
                     }
@@ -174,6 +165,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
             }
         }
+    }
+
+    companion object {
+        const val EXTRA_TOKEN = "extra_token"
     }
 
 }
